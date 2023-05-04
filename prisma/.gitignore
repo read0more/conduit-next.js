@@ -1,0 +1,4 @@
+*
+!schema.prisma
+!seed.js
+!.gitignore

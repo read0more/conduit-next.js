@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  password  String
+  email     String     @unique
+  username  String     @unique
+  image     String?
+  bio       String?
+
+  articles  Article[]
+  comments  Comment[]
+  favorites Favorite[]
+  follower Follow[] @relation("follower")
+  following Follow[] @relation("following")
+}
+
+model Article {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique
+  title     String
+  description String
+  body      String
+  tagList   Tag[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  favorites Favorite[]
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
+  comments  Comment[]
+
+  @@index([authorId], name: "authorId")
+}
+
+model Follow {
+  id        Int      @id @default(autoincrement())
+  followerId  Int
+  follower    User     @relation("follower", fields: [followerId], references: [id])
+  followingId  Int
+  following    User     @relation("following", fields: [followingId], references: [id])
+
+  @@index([followerId], name: "followerId")
+  @@index([followingId], name: "followingId")
+}
+
+model Favorite {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  articleId Int
+  article   Article  @relation(fields: [articleId], references: [id])
+
+  @@index([userId], name: "userId")
+  @@index([articleId], name: "articleId")
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
+  articleId Int
+  article   Article  @relation(fields: [articleId], references: [id])
+
+  @@index([authorId], name: "authorId")
+  @@index([articleId], name: "articleId")
+}
+
+model Tag {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  articles  Article[]
+}
