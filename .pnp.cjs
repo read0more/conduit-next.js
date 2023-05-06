@@ -30,6 +30,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@prisma/client", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:4.13.0"],\
             ["@prisma/nextjs-monorepo-workaround-plugin", "npm:4.13.0"],\
+            ["@t3-oss/env-nextjs", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:0.2.2"],\
             ["@tanstack/react-query", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:4.29.5"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:14.0.0"],\
@@ -1172,6 +1173,51 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@szmarczak/http-timer", "npm:4.0.6"],\
             ["defer-to-connect", "npm:2.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@t3-oss/env-core", [\
+        ["npm:0.2.2", {\
+          "packageLocation": "./.yarn/cache/@t3-oss-env-core-npm-0.2.2-fcc84637e3-92442f7f7d.zip/node_modules/@t3-oss/env-core/",\
+          "packageDependencies": [\
+            ["@t3-oss/env-core", "npm:0.2.2"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:3f65d7031e3fa0680af6ffdda07ed92334b8f0164c027e70b8032eb9d63fdf1b84c337c4c31b20796fbcf33e6106ba072910a6d2ec504930bb9f50b749e828fa#npm:0.2.2", {\
+          "packageLocation": "./.yarn/__virtual__/@t3-oss-env-core-virtual-5409b19362/0/cache/@t3-oss-env-core-npm-0.2.2-fcc84637e3-92442f7f7d.zip/node_modules/@t3-oss/env-core/",\
+          "packageDependencies": [\
+            ["@t3-oss/env-core", "virtual:3f65d7031e3fa0680af6ffdda07ed92334b8f0164c027e70b8032eb9d63fdf1b84c337c4c31b20796fbcf33e6106ba072910a6d2ec504930bb9f50b749e828fa#npm:0.2.2"],\
+            ["@types/zod", null],\
+            ["zod", "npm:3.21.4"]\
+          ],\
+          "packagePeers": [\
+            "@types/zod",\
+            "zod"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@t3-oss/env-nextjs", [\
+        ["npm:0.2.2", {\
+          "packageLocation": "./.yarn/cache/@t3-oss-env-nextjs-npm-0.2.2-632a5b61ad-de786186cf.zip/node_modules/@t3-oss/env-nextjs/",\
+          "packageDependencies": [\
+            ["@t3-oss/env-nextjs", "npm:0.2.2"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:0.2.2", {\
+          "packageLocation": "./.yarn/__virtual__/@t3-oss-env-nextjs-virtual-3f65d7031e/0/cache/@t3-oss-env-nextjs-npm-0.2.2-632a5b61ad-de786186cf.zip/node_modules/@t3-oss/env-nextjs/",\
+          "packageDependencies": [\
+            ["@t3-oss/env-nextjs", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:0.2.2"],\
+            ["@t3-oss/env-core", "virtual:3f65d7031e3fa0680af6ffdda07ed92334b8f0164c027e70b8032eb9d63fdf1b84c337c4c31b20796fbcf33e6106ba072910a6d2ec504930bb9f50b749e828fa#npm:0.2.2"],\
+            ["@types/zod", null],\
+            ["zod", "npm:3.21.4"]\
+          ],\
+          "packagePeers": [\
+            "@types/zod",\
+            "zod"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6227,6 +6273,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next.js-conduit", "workspace:."],\
             ["@prisma/client", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:4.13.0"],\
             ["@prisma/nextjs-monorepo-workaround-plugin", "npm:4.13.0"],\
+            ["@t3-oss/env-nextjs", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:0.2.2"],\
             ["@tanstack/react-query", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:4.29.5"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:14.0.0"],\
