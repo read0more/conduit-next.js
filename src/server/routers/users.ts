@@ -1,9 +1,8 @@
-import { registrationSchema } from 'src/schemes/users';
+import { registrationSchema, loginSchema } from 'src/schemes/users';
 import { router, procedure } from '../trpc';
 import prisma from 'src/lib/server/prismaClient';
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
-import { loginSchema } from 'src/schemes/login';
 import { Context } from 'src/server/routers/context';
 import { TRPCError } from '@trpc/server';
 import { generateToken } from 'src/lib/server/jwt';

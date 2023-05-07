@@ -11,3 +11,18 @@ export const registrationSchema = z.object({
   image: z.string().url().nullable(),
   bio: z.string().nullable(),
 });
+
+export const loginSchema = z
+  .object({
+    email: z.string().email(),
+    username: z.string(),
+    password: z.string(),
+  })
+  .partial({
+    email: true,
+    username: true,
+  })
+  .refine(
+    (data) => data.email || data.username,
+    'Either email or username should be filled in.'
+  );
