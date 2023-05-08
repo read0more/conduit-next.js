@@ -9,7 +9,7 @@ import { z } from 'zod';
 import bcrypt from 'bcrypt';
 import { Context } from 'src/server/routers/context';
 import { TRPCError } from '@trpc/server';
-import { generateToken, verifyToken } from 'src/lib/server/jwt';
+import { generateToken } from 'src/lib/server/jwt';
 import { env } from 'src/env.mjs';
 
 const saltOrRounds = 10;
@@ -96,8 +96,7 @@ const login = procedure
   );
 
 const user = protectedProcedure.query(async ({ ctx }) => {
-  const user = verifyToken(ctx.token!, env.JWT_ACCESS_TOKEN_SECRET);
-  const { password: _, ...userWithoutPassword } = user;
+  const { password: _, ...userWithoutPassword } = ctx.user!;
 
   return userWithoutPassword;
 });
@@ -105,7 +104,7 @@ const user = protectedProcedure.query(async ({ ctx }) => {
 const update = protectedProcedure
   .input(updateUserSchema)
   .mutation(async ({ input, ctx }) => {
-    const user = verifyToken(ctx.token!, env.JWT_ACCESS_TOKEN_SECRET);
+    const user = ctx.user!;
     input.password = await bcrypt.hash(input.password, saltOrRounds);
 
     const updatedUser = await prisma.user.update({

@@ -10,6 +10,7 @@ describe('protectedProcedure', () => {
     const ctx = await createContextInner({
       token: '',
       setTokenCookie: () => {},
+      user: null,
     });
     const caller = protectedRouter.createCaller(ctx);
     await expect(caller.test()).rejects.toBeInstanceOf(TRPCError);
@@ -22,6 +23,7 @@ describe('protectedProcedure', () => {
     const ctx = await createContextInner({
       token: 'this_is_token',
       setTokenCookie: () => {},
+      user: null,
     });
     const caller = protectedRouter.createCaller(ctx);
     await expect(caller.test()).resolves.toBeUndefined();
