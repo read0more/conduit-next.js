@@ -6,3 +6,7 @@ export const createScheme = z.object({
   body: z.string().min(1).max(2000),
   tagList: z.array(z.string()).optional(),
 });
+
+export const updateScheme = createScheme.partial().extend({
+  slug: z.string().min(1),
+});
