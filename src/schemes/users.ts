@@ -7,7 +7,14 @@ export const registrationSchema = z.object({
     .regex(/[A-Z]/)
     .regex(/[!@#$%^&*]/),
   email: z.string().email(),
-  username: z.string(),
+  username: z
+    .string()
+    .min(4)
+    .max(20)
+    .regex(
+      /^[a-zA-Z0-9_]+$/,
+      'The username must contain only letters, numbers and underscore (_)'
+    ),
   image: z.string().url().nullable(),
   bio: z.string().nullable(),
 });
@@ -28,3 +35,6 @@ export const loginSchema = z
   );
 
 export const updateUserSchema = registrationSchema;
+export const getProfileSchema = z.object({
+  username: z.string(),
+});
