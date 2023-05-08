@@ -38,3 +38,7 @@ export const updateUserSchema = registrationSchema;
 export const getProfileSchema = z.object({
   username: z.string(),
 });
+
+export const followSchema = z.object({
+  followingId: z.number(),
+});

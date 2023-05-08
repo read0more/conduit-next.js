@@ -3,7 +3,8 @@ import {
   loginSchema,
   updateUserSchema,
   getProfileSchema,
-} from 'src/schemes/users';
+  followSchema,
+} from 'src/schemes/user';
 import { router, procedure, protectedProcedure } from '../trpc';
 import prisma from 'src/lib/server/prismaClient';
 import { z } from 'zod';
@@ -152,12 +153,39 @@ const profile = procedure
     }
   });
 
+export const follow = protectedProcedure
+  .input(followSchema)
+  .mutation(async ({ input, ctx }) => {
+    const exists = await prisma.follow.findFirst({
+      where: {
+        followerId: ctx.user!.id,
+        followingId: input.followingId,
+      },
+    });
+
+    if (exists) {
+      await prisma.follow.delete({
+        where: {
+          id: exists.id,
+        },
+      });
+    } else {
+      await prisma.follow.create({
+        data: {
+          followerId: ctx.user!.id,
+          followingId: input.followingId,
+        },
+      });
+    }
+  });
+
 export const userRouter = router({
   registration,
   login,
   user,
   update,
   profile,
+  follow,
 });
 
 export type UserRouter = typeof userRouter;
