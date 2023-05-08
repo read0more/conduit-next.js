@@ -26,3 +26,5 @@ export const loginSchema = z
     (data) => data.email || data.username,
     'Either email or username should be filled in.'
   );
+
+export const updateUserSchema = registrationSchema;

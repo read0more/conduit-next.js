@@ -1,12 +1,17 @@
-import { registrationSchema, loginSchema } from 'src/schemes/users';
-import { router, procedure } from '../trpc';
+import {
+  registrationSchema,
+  loginSchema,
+  updateUserSchema,
+} from 'src/schemes/users';
+import { router, procedure, protectedProcedure } from '../trpc';
 import prisma from 'src/lib/server/prismaClient';
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 import { Context } from 'src/server/routers/context';
 import { TRPCError } from '@trpc/server';
-import { generateToken } from 'src/lib/server/jwt';
+import { generateToken, verifyToken } from 'src/lib/server/jwt';
 
+const saltOrRounds = 10;
 const registration = procedure
   .input(registrationSchema)
   .mutation(async ({ input }) => {
@@ -42,7 +47,7 @@ const registration = procedure
       ]);
     }
 
-    const hashedPassword = await bcrypt.hash(input.password, 10);
+    const hashedPassword = await bcrypt.hash(input.password, saltOrRounds);
     const newUser = await prisma.user.create({
       data: { ...input, password: hashedPassword },
     });
@@ -89,9 +94,35 @@ const login = procedure
     }
   );
 
+const user = protectedProcedure.query(async ({ ctx }) => {
+  const user = verifyToken(ctx.token!, process.env.JWT_ACCESS_TOKEN_SECRET!);
+  const { password: _, ...userWithoutPassword } = user;
+
+  return userWithoutPassword;
+});
+
+const update = protectedProcedure
+  .input(updateUserSchema)
+  .mutation(async ({ input, ctx }) => {
+    const user = verifyToken(ctx.token!, process.env.JWT_ACCESS_TOKEN_SECRET!);
+    input.password = await bcrypt.hash(input.password, saltOrRounds);
+
+    const updatedUser = await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: input,
+    });
+
+    const { password: _, ...userWithoutPassword } = updatedUser;
+    return userWithoutPassword;
+  });
+
 export const userRouter = router({
   registration,
   login,
+  user,
+  update,
 });
 
 export type UserRouter = typeof userRouter;
