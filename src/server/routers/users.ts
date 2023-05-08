@@ -10,6 +10,7 @@ import bcrypt from 'bcrypt';
 import { Context } from 'src/server/routers/context';
 import { TRPCError } from '@trpc/server';
 import { generateToken, verifyToken } from 'src/lib/server/jwt';
+import { env } from 'src/env.mjs';
 
 const saltOrRounds = 10;
 const registration = procedure
@@ -86,8 +87,8 @@ const login = procedure
 
       const token = generateToken(
         user,
-        process.env.JWT_ACCESS_TOKEN_SECRET!,
-        process.env.JWT_ACCESS_TOKEN_EXPIRATION!
+        env.JWT_ACCESS_TOKEN_SECRET,
+        env.JWT_ACCESS_TOKEN_EXPIRATION
       );
 
       ctx.setTokenCookie(token);
@@ -95,7 +96,7 @@ const login = procedure
   );
 
 const user = protectedProcedure.query(async ({ ctx }) => {
-  const user = verifyToken(ctx.token!, process.env.JWT_ACCESS_TOKEN_SECRET!);
+  const user = verifyToken(ctx.token!, env.JWT_ACCESS_TOKEN_SECRET);
   const { password: _, ...userWithoutPassword } = user;
 
   return userWithoutPassword;
@@ -104,7 +105,7 @@ const user = protectedProcedure.query(async ({ ctx }) => {
 const update = protectedProcedure
   .input(updateUserSchema)
   .mutation(async ({ input, ctx }) => {
-    const user = verifyToken(ctx.token!, process.env.JWT_ACCESS_TOKEN_SECRET!);
+    const user = verifyToken(ctx.token!, env.JWT_ACCESS_TOKEN_SECRET);
     input.password = await bcrypt.hash(input.password, saltOrRounds);
 
     const updatedUser = await prisma.user.update({
