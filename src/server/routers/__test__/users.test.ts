@@ -9,6 +9,7 @@ test('registration should return the generated user without password', async () 
   const ctx = await createContextInner({
     token: undefined,
     setTokenCookie: () => {},
+    user: null,
   });
   const caller = userRouter.createCaller(ctx);
   const input: inferProcedureInput<UserRouter['registration']> = {

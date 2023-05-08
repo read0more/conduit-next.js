@@ -2,6 +2,7 @@ import {
   registrationSchema,
   loginSchema,
   updateUserSchema,
+  getProfileSchema,
 } from 'src/schemes/users';
 import { router, procedure, protectedProcedure } from '../trpc';
 import prisma from 'src/lib/server/prismaClient';
@@ -118,11 +119,45 @@ const update = protectedProcedure
     return userWithoutPassword;
   });
 
+const profile = procedure
+  .input(getProfileSchema)
+  .query(async ({ input, ctx }) => {
+    const myId = ctx?.user?.id;
+    try {
+      const user = await prisma.user.findUniqueOrThrow({
+        where: {
+          username: input.username,
+        },
+        select: {
+          id: true,
+          username: true,
+          email: true,
+          bio: true,
+          image: true,
+          following: {
+            where: {
+              id: myId,
+            },
+          },
+        },
+      });
+
+      const following = !!user.following?.length;
+      return { ...user, following };
+    } catch (error) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'User not found',
+      });
+    }
+  });
+
 export const userRouter = router({
   registration,
   login,
   user,
   update,
+  profile,
 });
 
 export type UserRouter = typeof userRouter;
