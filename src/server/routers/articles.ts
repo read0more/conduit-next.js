@@ -1,4 +1,4 @@
-import { createScheme, updateScheme } from 'src/schemes/article';
+import { createScheme, deleteScheme, updateScheme } from 'src/schemes/article';
 import { router, procedure, protectedProcedure } from '../trpc';
 import prisma from 'src/lib/server/prismaClient';
 
@@ -70,9 +70,36 @@ const update = protectedProcedure
     };
   });
 
+const remove = protectedProcedure
+  .input(deleteScheme)
+  .mutation(async ({ input, ctx: { user } }) => {
+    const article = await prisma.article.findFirst({
+      where: {
+        slug: input.slug,
+        authorId: user!.id,
+      },
+    });
+
+    if (!article) {
+      // TODO: 403으로 처리
+      throw new Error('Article not found');
+    }
+
+    await prisma.article.delete({
+      where: {
+        id: article.id,
+      },
+    });
+
+    return {
+      article,
+    };
+  });
+
 export const articleRouter = router({
   create,
   update,
+  remove,
 });
 
 export type ArticleRouter = typeof articleRouter;

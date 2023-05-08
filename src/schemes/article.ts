@@ -10,3 +10,7 @@ export const createScheme = z.object({
 export const updateScheme = createScheme.partial().extend({
   slug: z.string().min(1),
 });
+
+export const deleteScheme = z.object({
+  slug: z.string().min(1),
+});
