@@ -11,6 +11,20 @@ export const updateScheme = createScheme.partial().extend({
   slug: z.string().min(1),
 });
 
-export const deleteScheme = z.object({
+export const getScheme = z.object({
   slug: z.string().min(1),
 });
+
+export const deleteScheme = getScheme;
+
+export const favoriteScheme = getScheme;
+
+export const listScheme = z.object({
+  tag: z.string().optional(),
+  author: z.string().optional(),
+  favorited: z.string().optional(),
+  limit: z.number().int().min(1).max(20).optional().default(20),
+  offset: z.number().int().min(0).optional().default(0),
+});
+
+export const feedScheme = listScheme;
