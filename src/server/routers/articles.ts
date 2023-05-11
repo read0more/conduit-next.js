@@ -9,35 +9,43 @@ import {
 } from 'src/schemes/article';
 import { router, procedure, protectedProcedure } from '../trpc';
 import prisma from 'src/lib/server/prismaClient';
+import { z } from 'zod';
 
 type ArticleWhere = (typeof prisma.article.findMany)['arguments'][0]['where'];
 
-const list = procedure.input(listScheme).query(async ({ input }) => {
-  const { limit, offset, ...restInput } = input;
-
+function getListWhereCondition(
+  input: z.infer<typeof listScheme>
+): ArticleWhere {
   const where: ArticleWhere = {};
 
-  if (restInput.author) {
+  if (input.author) {
     where.author = {
-      username: restInput.author,
+      username: input.author,
     };
   }
 
-  if (restInput.favorited) {
+  if (input.favorited) {
     where.favorites = {
       some: {
-        username: restInput.favorited,
+        username: input.favorited,
       },
     };
   }
 
-  if (restInput.tag) {
+  if (input.tag) {
     where.tagList = {
       some: {
-        name: restInput.tag,
+        name: input.tag,
       },
     };
   }
+
+  return where;
+}
+
+const list = procedure.input(listScheme).query(async ({ input }) => {
+  const { limit, offset } = input;
+  const where: ArticleWhere = getListWhereCondition(input);
 
   const articles = await prisma.article.findMany({
     where,
@@ -59,39 +67,9 @@ const list = procedure.input(listScheme).query(async ({ input }) => {
 const feed = protectedProcedure
   .input(feedScheme)
   .query(async ({ input, ctx }) => {
-    const { limit, offset, ...restInput } = input;
+    const { limit, offset } = input;
     const user = ctx.user!;
-    const where: ArticleWhere = {};
-
-    where.author = {
-      following: {
-        some: {
-          followerId: user.id,
-        },
-      },
-    };
-
-    if (restInput.author) {
-      where.author = {
-        username: restInput.author,
-      };
-    }
-
-    if (restInput.favorited) {
-      where.favorites = {
-        some: {
-          username: restInput.favorited,
-        },
-      };
-    }
-
-    if (restInput.tag) {
-      where.tagList = {
-        some: {
-          name: restInput.tag,
-        },
-      };
-    }
+    const where: ArticleWhere = getListWhereCondition(input);
 
     const articles = await prisma.article.findMany({
       where,
