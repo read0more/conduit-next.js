@@ -125,25 +125,18 @@ const profile = procedure
   .query(async ({ input, ctx }) => {
     const myId = ctx?.user?.id;
     try {
-      const user = await prisma.user.findUniqueOrThrow({
+      const user = await prisma.user.findFirstOrThrow({
         where: {
           username: input.username,
         },
-        select: {
-          id: true,
-          username: true,
-          email: true,
-          bio: true,
-          image: true,
-          following: {
-            where: {
-              id: myId,
-            },
-          },
+        include: {
+          follower: true,
         },
       });
 
-      const following = !!user.following?.length;
+      const following = !!user.follower?.find(
+        (user) => user.followerId === myId
+      );
       return { ...user, following };
     } catch (error) {
       throw new TRPCError({
