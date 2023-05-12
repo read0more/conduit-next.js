@@ -71,6 +71,14 @@ const feed = protectedProcedure
     const user = ctx.user!;
     const where: ArticleWhere = getListWhereCondition(input);
 
+    where.author = {
+      following: {
+        some: {
+          followerId: user.id,
+        },
+      },
+    };
+
     const articles = await prisma.article.findMany({
       where,
       take: limit,
