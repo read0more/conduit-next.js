@@ -149,16 +149,12 @@ const update = protectedProcedure
     const user = ctx.user!;
     const { slug, ...rest } = input;
 
-    const article = await prisma.article.findFirst({
+    const article = await prisma.article.findFirstOrThrow({
       where: {
         slug,
         authorId: user.id,
       },
     });
-
-    if (!article) {
-      throw new Error('Article not found');
-    }
 
     const title = input.title ?? article.title;
     const tagList = input.tagList ?? [];
@@ -186,21 +182,16 @@ const update = protectedProcedure
 const remove = protectedProcedure
   .input(deleteScheme)
   .mutation(async ({ input, ctx: { user } }) => {
-    const article = await prisma.article.findFirst({
+    const article = await prisma.article.findFirstOrThrow({
       where: {
         slug: input.slug,
         authorId: user!.id,
       },
     });
 
-    if (!article) {
-      // TODO: 403으로 처리
-      throw new Error('Article not found');
-    }
-
     await prisma.article.delete({
       where: {
-        id: article.id,
+        slug: input.slug,
       },
     });
 
@@ -212,15 +203,11 @@ const remove = protectedProcedure
 const favorite = protectedProcedure
   .input(favoriteScheme)
   .mutation(async ({ input, ctx: { user } }) => {
-    const article = await prisma.article.findFirst({
+    const article = await prisma.article.findFirstOrThrow({
       where: {
         slug: input.slug,
       },
     });
-
-    if (!article) {
-      throw new Error('Article not found');
-    }
 
     const exists = await prisma.favorite.findFirst({
       where: {
