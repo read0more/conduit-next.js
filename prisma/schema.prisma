@@ -23,8 +23,8 @@ model User {
   articles  Article[]
   comments  Comment[]
   favorites Favorite[]
-  follower Follow[] @relation("follower")
-  following Follow[] @relation("following")
+  follower Follow[] @relation("following")
+  following Follow[] @relation("follower")
 }
 
 model Article {

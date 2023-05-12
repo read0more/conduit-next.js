@@ -2,3 +2,6 @@
 !schema.prisma
 !seed.js
 !.gitignore
+
+!migrations
+!migrations/**/*
