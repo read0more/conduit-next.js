@@ -28,6 +28,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@csstools/normalize.css", "npm:12.0.0"],\
             ["@prisma/client", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:4.14.0"],\
             ["@prisma/nextjs-monorepo-workaround-plugin", "npm:4.13.0"],\
             ["@t3-oss/env-nextjs", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:0.2.2"],\
@@ -58,6 +59,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lint-staged", "npm:13.2.1"],\
             ["msw", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:1.2.1"],\
             ["next", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:13.2.4"],\
+            ["postcss-normalize", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:10.0.1"],\
             ["prettier", "npm:2.8.7"],\
             ["prisma", "npm:4.14.0"],\
             ["prisma-client", "link:./prisma::locator=next.js-conduit%40workspace%3A."],\
@@ -2740,6 +2742,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/helper-string-parser", "npm:7.21.5"],\
             ["@babel/helper-validator-identifier", "npm:7.19.1"],\
             ["to-fast-properties", "npm:2.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@csstools/normalize.css", [\
+        ["npm:12.0.0", {\
+          "packageLocation": "./.yarn/cache/@csstools-normalize.css-npm-12.0.0-b25d07810f-fbef0f7fe4.zip/node_modules/@csstools/normalize.css/",\
+          "packageDependencies": [\
+            ["@csstools/normalize.css", "npm:12.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -8753,6 +8764,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["next.js-conduit", "workspace:."],\
+            ["@csstools/normalize.css", "npm:12.0.0"],\
             ["@prisma/client", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:4.14.0"],\
             ["@prisma/nextjs-monorepo-workaround-plugin", "npm:4.13.0"],\
             ["@t3-oss/env-nextjs", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:0.2.2"],\
@@ -8783,6 +8795,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lint-staged", "npm:13.2.1"],\
             ["msw", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:1.2.1"],\
             ["next", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:13.2.4"],\
+            ["postcss-normalize", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:10.0.1"],\
             ["prettier", "npm:2.8.7"],\
             ["prisma", "npm:4.14.0"],\
             ["prisma-client", "link:./prisma::locator=next.js-conduit%40workspace%3A."],\
@@ -9375,6 +9388,61 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["postcss-browser-comments", [\
+        ["npm:4.0.0", {\
+          "packageLocation": "./.yarn/cache/postcss-browser-comments-npm-4.0.0-ad08f76065-9b8e709483.zip/node_modules/postcss-browser-comments/",\
+          "packageDependencies": [\
+            ["postcss-browser-comments", "npm:4.0.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:5d913c63593d6f5e1d324e94f969448d8a5b7ec97b89b1a40453fb4301760ae858ea130252bd412ca123f45214c9106701c1bead12d9ee7355146985d5fddaf4#npm:4.0.0", {\
+          "packageLocation": "./.yarn/__virtual__/postcss-browser-comments-virtual-56f1f47833/0/cache/postcss-browser-comments-npm-4.0.0-ad08f76065-9b8e709483.zip/node_modules/postcss-browser-comments/",\
+          "packageDependencies": [\
+            ["postcss-browser-comments", "virtual:5d913c63593d6f5e1d324e94f969448d8a5b7ec97b89b1a40453fb4301760ae858ea130252bd412ca123f45214c9106701c1bead12d9ee7355146985d5fddaf4#npm:4.0.0"],\
+            ["@types/browserslist", null],\
+            ["@types/postcss", null],\
+            ["browserslist", null],\
+            ["postcss", null]\
+          ],\
+          "packagePeers": [\
+            "@types/browserslist",\
+            "@types/postcss",\
+            "browserslist",\
+            "postcss"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["postcss-normalize", [\
+        ["npm:10.0.1", {\
+          "packageLocation": "./.yarn/cache/postcss-normalize-npm-10.0.1-f2f3d55340-af67ade84e.zip/node_modules/postcss-normalize/",\
+          "packageDependencies": [\
+            ["postcss-normalize", "npm:10.0.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:10.0.1", {\
+          "packageLocation": "./.yarn/__virtual__/postcss-normalize-virtual-5d913c6359/0/cache/postcss-normalize-npm-10.0.1-f2f3d55340-af67ade84e.zip/node_modules/postcss-normalize/",\
+          "packageDependencies": [\
+            ["postcss-normalize", "virtual:bd0cd6452b8ce4ebeae43a8be614226f5dd2f82111c4b4d8c9a212a8d69f61382727536ab36cf6b8588bd9091d9df3a63f44a605bab33c2500448b75ed2e177c#npm:10.0.1"],\
+            ["@csstools/normalize.css", "npm:12.0.0"],\
+            ["@types/browserslist", null],\
+            ["@types/postcss", null],\
+            ["browserslist", null],\
+            ["postcss", null],\
+            ["postcss-browser-comments", "virtual:5d913c63593d6f5e1d324e94f969448d8a5b7ec97b89b1a40453fb4301760ae858ea130252bd412ca123f45214c9106701c1bead12d9ee7355146985d5fddaf4#npm:4.0.0"],\
+            ["sanitize.css", "npm:13.0.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/browserslist",\
+            "@types/postcss",\
+            "browserslist",\
+            "postcss"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["postcss-value-parser", [\
         ["npm:4.2.0", {\
           "packageLocation": "./.yarn/cache/postcss-value-parser-npm-4.2.0-3cef602a6a-819ffab0c9.zip/node_modules/postcss-value-parser/",\
@@ -9948,6 +10016,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/safer-buffer-npm-2.1.2-8d5c0b705e-cab8f25ae6.zip/node_modules/safer-buffer/",\
           "packageDependencies": [\
             ["safer-buffer", "npm:2.1.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["sanitize.css", [\
+        ["npm:13.0.0", {\
+          "packageLocation": "./.yarn/cache/sanitize.css-npm-13.0.0-3424903b5d-a99ca77c4d.zip/node_modules/sanitize.css/",\
+          "packageDependencies": [\
+            ["sanitize.css", "npm:13.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\

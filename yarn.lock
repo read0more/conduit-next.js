@@ -1620,6 +1620,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@csstools/normalize.css@npm:*, @csstools/normalize.css@npm:^12.0.0":
+  version: 12.0.0
+  resolution: "@csstools/normalize.css@npm:12.0.0"
+  checksum: fbef0f7fe4edbc3ce31b41257f0fa06e0442f11260e41c082a98de9b824997786a16900e7a5c0f4ca8f736dcd25dfd01c153d1c994a07d42c93c0a526ce0774d
+  languageName: node
+  linkType: hard
+
 "@emotion/unitless@npm:^0.8.0":
   version: 0.8.1
   resolution: "@emotion/unitless@npm:0.8.1"
@@ -6578,6 +6585,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "next.js-conduit@workspace:."
   dependencies:
+    "@csstools/normalize.css": ^12.0.0
     "@prisma/client": latest
     "@prisma/nextjs-monorepo-workaround-plugin": ^4.13.0
     "@t3-oss/env-nextjs": ^0.2.2
@@ -6608,6 +6616,7 @@ __metadata:
     lint-staged: ^13.2.0
     msw: ^1.1.0
     next: 13.2.4
+    postcss-normalize: ^10.0.1
     prettier: ^2.8.4
     prisma: latest
     prisma-client: "link:./prisma"
@@ -7185,6 +7194,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss-browser-comments@npm:^4":
+  version: 4.0.0
+  resolution: "postcss-browser-comments@npm:4.0.0"
+  peerDependencies:
+    browserslist: ">=4"
+    postcss: ">=8"
+  checksum: 9b8e7094838c2d7bd1ab3ca9cb8d0a78a9a6c8e22f43133ba02db8862fb6c141630e9f590e46f7125cfa4723cacd27b74fa00c05a9907b364dc1f6f17cf13f6f
+  languageName: node
+  linkType: hard
+
+"postcss-normalize@npm:^10.0.1":
+  version: 10.0.1
+  resolution: "postcss-normalize@npm:10.0.1"
+  dependencies:
+    "@csstools/normalize.css": "*"
+    postcss-browser-comments: ^4
+    sanitize.css: "*"
+  peerDependencies:
+    browserslist: ">= 4"
+    postcss: ">= 8"
+  checksum: af67ade84e5d65de0cf84cde479840da96ffb2037fe6bf86737788216f67e414622e718e7d84182885ad65fa948150e4a0c3e454ca63e619dd5c7b4eb4224c39
+  languageName: node
+  linkType: hard
+
 "postcss-value-parser@npm:^4.0.2":
   version: 4.2.0
   resolution: "postcss-value-parser@npm:4.2.0"
@@ -7714,6 +7747,13 @@ __metadata:
   version: 2.1.2
   resolution: "safer-buffer@npm:2.1.2"
   checksum: cab8f25ae6f1434abee8d80023d7e72b598cf1327164ddab31003c51215526801e40b66c5e65d658a0af1e9d6478cadcb4c745f4bd6751f97d8644786c0978b0
+  languageName: node
+  linkType: hard
+
+"sanitize.css@npm:*":
+  version: 13.0.0
+  resolution: "sanitize.css@npm:13.0.0"
+  checksum: a99ca77c4d135800a4a93c3555e5aa4a2eb040a833df716dbe9132e1f2086fbf9acdb8021a579f40dcf77166d2d50f3358b4b6121a247d26fed5a0e6f5af3bb7
   languageName: node
   linkType: hard
 
