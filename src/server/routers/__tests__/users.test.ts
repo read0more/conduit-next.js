@@ -1,4 +1,4 @@
-import { User } from './../../../../prisma/index.d';
+import { User } from 'prisma-client';
 import { inferProcedureInput } from '@trpc/server';
 import { userRouter, UserRouter } from '../users';
 import { createContextInner } from '../context';
@@ -33,20 +33,6 @@ test('registration should return the generated user without password', async () 
   expect(user).toEqual(userWithoutPassword);
 });
 
-/*
-{
-      id: 2,
-      password: '$2b$10$vJcDBqU1E4wfVrpbmE.NluQi2I3wV6GGQF.ege7Jju5cD.NCFnDJa',
-      email: 'test2@gamil.com',
-      username: 'test2',
-      image: 'https://google.com',
-      bio: 'test2',
-      following: [
-        { id: 1, followerId: 1, followingId: 2 },
-        { id: 3, followerId: 3, followingId: 2 },
-      ],
-    }
-*/
 interface UserWithFollowing extends User {
   follower: {
     id: number;
