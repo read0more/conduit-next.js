@@ -1,7 +1,7 @@
 import {
   registrationSchema,
   loginSchema,
-  updateUserSchema,
+  updateProfileSchema,
   getProfileSchema,
   followSchema,
 } from 'src/schemes/user';
@@ -104,7 +104,7 @@ const user = protectedProcedure.query(async ({ ctx }) => {
 });
 
 const update = protectedProcedure
-  .input(updateUserSchema)
+  .input(updateProfileSchema)
   .mutation(async ({ input, ctx }) => {
     const user = ctx.user!;
     input.password = await bcrypt.hash(input.password, saltOrRounds);
