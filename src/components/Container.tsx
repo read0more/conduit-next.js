@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export default styled.div`
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1em;
 
   @media (min-width: 1200px) {
     max-width: 1140px;
