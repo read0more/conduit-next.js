@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@csstools/normalize.css": "^12.0.0",
+    "@hookform/resolvers": "^3.1.0",
     "@prisma/client": "latest",
     "@t3-oss/env-nextjs": "^0.2.2",
     "@tanstack/react-query": "^4.29.5",
@@ -26,6 +27,7 @@
     "prisma-client": "link:./prisma",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.9",
     "src": "link:./src",
     "styled-components": "^6.0.0-rc.1",
     "zod": "^3.21.4"
