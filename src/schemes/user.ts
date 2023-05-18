@@ -15,8 +15,6 @@ export const registrationSchema = z.object({
       /^[a-zA-Z0-9_]+$/,
       'The username must contain only letters, numbers and underscore (_)'
     ),
-  image: z.string().url().nullable(),
-  bio: z.string().nullable(),
 });
 
 export const loginSchema = z
@@ -34,7 +32,10 @@ export const loginSchema = z
     'Either email or username should be filled in.'
   );
 
-export const updateUserSchema = registrationSchema;
+export const updateProfileSchema = registrationSchema.extend({
+  image: z.string().url().nullable(),
+  bio: z.string().nullable(),
+});
 export const getProfileSchema = z.object({
   username: z.string(),
 });

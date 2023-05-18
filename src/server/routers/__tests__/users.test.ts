@@ -16,14 +16,14 @@ test('registration should return the generated user without password', async () 
   const input: inferProcedureInput<UserRouter['registration']> = {
     email: 'test@gmail.com',
     password: 'tesSt3@d!@',
-    image: 'https://some_image.com',
     username: 'test',
-    bio: '',
   };
 
   const newUser = {
     ...input,
     id: 1,
+    bio: '',
+    image: '',
   };
 
   prisma.user.create.mockResolvedValue(newUser);
