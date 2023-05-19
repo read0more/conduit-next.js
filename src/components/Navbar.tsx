@@ -4,6 +4,8 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { useUser } from 'src/lib/client/UserProvider';
 import { useRouter } from 'next/router';
+import CreateArticle from './icons/CreateArticle';
+import Settings from './icons/Settings';
 
 const Nav = styled.nav`
   display: flex;
@@ -25,6 +27,7 @@ const Title = styled.h1`
 
 const Ul = styled.ul`
   display: flex;
+  align-items: center;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -39,10 +42,16 @@ const Li = styled.li<LiProps>`
   color: ${({ selected }) => (selected ? 'black' : 'lightgrey')};
 `;
 
+type Menu = {
+  name: string;
+  href: string;
+  icon?: (selected: boolean) => React.ReactNode;
+};
+
 export default function Navbar() {
   const { user, isLoading } = useUser();
   const { pathname } = useRouter();
-  const loggedInMenu = [
+  const loggedInMenu: Menu[] = [
     {
       name: 'Home',
       href: '/',
@@ -50,18 +59,20 @@ export default function Navbar() {
     {
       name: 'New Article',
       href: '/editor',
+      icon: (selected) => <CreateArticle selected={selected} />,
     },
     {
       name: 'Settings',
       href: '/settings',
+      icon: (selected) => <Settings selected={selected} />,
     },
     {
-      name: user?.username,
+      name: user?.username ?? '',
       href: `/${user?.username}`,
     },
   ];
 
-  const loggedOutMenu = [
+  const loggedOutMenu: Menu[] = [
     {
       name: 'Home',
       href: '/',
@@ -87,7 +98,16 @@ export default function Navbar() {
         <Ul>
           {menu.map((item) => (
             <Li key={item.name} selected={pathname === item.href}>
-              <Link href={item.href}>{item.name}</Link>
+              <Link
+                href={item.href}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                {item?.icon ? item.icon(pathname === item.href) : ''}
+                {item.name}
+              </Link>
             </Li>
           ))}
         </Ul>
