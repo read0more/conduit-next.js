@@ -14,8 +14,9 @@ export default function Settings({ width, height, selected }: Props) {
       xmlns="http://www.w3.org/2000/svg"
       fill={color}
       style={{
-        width: width || 24,
-        height: height || 24,
+        width: width || 20,
+        height: height || 20,
+        marginRight: '0.3em',
       }}
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
