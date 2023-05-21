@@ -18,11 +18,14 @@ export default function UserProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const user = trpc.users.user.useQuery();
+  const user = trpc.users.user.useQuery(undefined, {
+    retry: false,
+  });
+
   return (
     <UserContext.Provider
       value={{
-        user: user.data,
+        user: user.data as UserToken,
         isLoading: user.isLoading,
       }}
     >
