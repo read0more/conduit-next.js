@@ -9,6 +9,7 @@ import { loginSchema } from '../schemes/user';
 import z from 'zod';
 import { trpc } from '../lib/client/trpc';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const Title = styled.h2`
   text-align: center;
@@ -47,17 +48,33 @@ const Button = styled.button`
   align-self: flex-end;
 `;
 
+const ErrorParagraph = styled.p`
+  color: red;
+  font-weight: bold;
+  margin-bottom: 0;
+`;
+
 type LoginSchemaType = z.infer<typeof loginSchema>;
 const Login: NextPage = () => {
   const { register, handleSubmit } = useForm<LoginSchemaType>({
     resolver: zodResolver(loginSchema),
   });
+  const [error, setError] = useState('');
   const login = trpc.users.login.useMutation();
   const router = useRouter();
 
   const onSubmit = async (data: LoginSchemaType) => {
-    await login.mutateAsync(data);
-    router.push('/');
+    try {
+      await login.mutateAsync(data);
+      router.push('/');
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+        return;
+      }
+
+      setError('An error occurred');
+    }
   };
 
   return (
@@ -66,6 +83,7 @@ const Login: NextPage = () => {
         <Title>Sign In</Title>
         <AccountLInk href="/register">Need an account?</AccountLInk>
         <Form onSubmit={handleSubmit(onSubmit)}>
+          {error && <ErrorParagraph>{error}</ErrorParagraph>}
           <Input type="text" placeholder="Username" {...register('username')} />
           <Input
             type="password"
