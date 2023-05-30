@@ -6,6 +6,7 @@ import { useUser } from 'src/lib/client/UserProvider';
 import { useRouter } from 'next/router';
 import CreateArticle from './icons/CreateArticle';
 import Settings from './icons/Settings';
+import Image from 'next/image';
 
 const Nav = styled.nav`
   display: flex;
@@ -69,6 +70,15 @@ export default function Navbar() {
     {
       name: user?.username ?? '',
       href: `/${user?.username}`,
+      icon: () => (
+        <Image
+          src="https://api.realworld.io/images/smiley-cyrus.jpeg"
+          alt="user avatar"
+          width={30}
+          height={30}
+          style={{ borderRadius: '50%', marginRight: '0.5em' }}
+        />
+      ),
     },
   ];
 

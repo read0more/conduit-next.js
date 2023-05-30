@@ -14,6 +14,9 @@ const nextConfig = {
 
     return config;
   },
+  images: {
+    domains: ['api.realworld.io'],
+  },
 };
 
 export default nextConfig;
