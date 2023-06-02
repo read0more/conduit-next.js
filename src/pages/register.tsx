@@ -14,6 +14,7 @@ const Title = styled.h2`
   text-align: center;
   margin: 0;
 `;
+
 const AccountLInk = styled(Link)`
   display: block;
   text-align: center;
@@ -22,6 +23,7 @@ const AccountLInk = styled(Link)`
   margin: 0.7em 0;
   color: #5cb85c;
 `;
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -31,11 +33,13 @@ const Form = styled.form`
     margin: 0 10em;
   }
 `;
+
 const Input = styled.input`
   padding: 0.7em;
   border-radius: 0.2em;
   border: 1px solid lightgrey;
 `;
+
 const Button = styled.button`
   appearance: none;
   border: none;
@@ -49,11 +53,9 @@ const Button = styled.button`
 
 type RegistrationSchemaType = z.infer<typeof registrationSchema>;
 const Register: NextPage = () => {
-  const { register, handleSubmit, formState } = useForm<RegistrationSchemaType>(
-    {
-      resolver: zodResolver(registrationSchema),
-    }
-  );
+  const { register, handleSubmit } = useForm<RegistrationSchemaType>({
+    resolver: zodResolver(registrationSchema),
+  });
   const registerUser = trpc.users.registration.useMutation();
   const router = useRouter();
 
