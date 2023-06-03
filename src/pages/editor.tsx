@@ -24,6 +24,10 @@ const Input = styled.input`
   padding: 0.7em;
   border-radius: 0.2em;
   border: 1px solid lightgrey;
+
+  &::placeholder {
+    font-family: Arial;
+  }
 `;
 
 const Button = styled.button`
@@ -97,8 +101,8 @@ const Editor: NextPage = () => {
           />
           <Input
             as="textarea"
-            type="b"
             placeholder="Write your article (in markdown)"
+            style={{ resize: 'vertical' }}
             {...register('body')}
           />
           <Controller
